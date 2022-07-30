@@ -1,0 +1,2 @@
+# Anemia_severity_level_detection
+With this project I developed a machine learning based early detection and prediction of anemia among pregnant women following Antenatal Care Clinic(ANC) based on collected medical records of pregnant womens or the maternal determinants. The data were taken from the Demographic Health Survey(DHS) and some of them are taken from the local public hospitals. I hope that this study will help to take the necessary precautions in order to reduce the risk of this anemia disease among the general population.
