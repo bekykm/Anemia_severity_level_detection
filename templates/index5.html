@@ -1,0 +1,209 @@
+ <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Anemia_prediction</title>
+    </head>
+    
+<!-- Adding styles like colour, height, width, border to our html page        color: goldenrod; -->
+<style>
+
+
+input[type=text], select {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: bolder;
+}
+
+input[type=submit] {
+  width: 80%;
+  background-color: goldenrod;
+  color:black;
+  padding: 12px 18px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size:130;
+  font-weight: bolder;
+}
+
+
+input[type=submit]:hover {
+  background-color: orangered;
+  color: #ffffff;
+}
+form{
+    border-radius: 10px;
+    padding-top: 5%;
+    font-weight: bolder;
+}
+div {
+ 
+  border-radius: 5px;
+  margin-left: 25%;
+  width: 60%;
+  
+}
+
+h2{
+    color: #ffffff;
+    font-size: 30px;
+    font-weight: bolder;
+}
+h3{
+  color: white;
+}
+
+body {
+            
+            background-image: url("static/bg.gif");
+            background-repeat: no-repeat;
+            background-size: cover;
+            text-align: center;
+            padding: 0px;
+        }
+       
+</style>
+
+<body>
+
+<center><h2>Early Detection and Severity Level Assessment of Anemia</h2></center>
+
+<div>
+ <!-- Html form which will get all the values from user -->
+ <form action="{{ url_for('predict')}}" method="post" style="background-color:#E6E6FA">
+ 
+ <center><b><h2 style="color:#FF0000";>{{ prediction_text}}</h2></b></center> 
+ <select name="age" required>  
+      <option selected="true" disabled="disabled" value="">Select age group</option>
+      <option value="0">15 - 19 ages</option>
+      <option value="1">20 - 24 ages</option>
+      <option value="2">25 - 29 ages</option>
+      <option value="3">30 - 34 ages</option>
+      <option value="4">35 - 39 ages</option>
+      <option value="5">40 - 44 ages</option>
+      <option value="6">45 - 49 ages</option>
+    </select>
+
+     <select name="region" required="required">  
+      <option selected="true" disabled="disabled" value="">Region</option>
+      <option value="0">Tigray</option>
+      <option value="1">Afar</option>
+      <option value="2">Amhara</option>
+      <option value="3">oromia</option>
+      <option value="4">Somalia</option>
+      <option value="5">Benishangul</option>
+      <option value="6">SNNPR</option>
+      <option value="7">Gambela</option>
+      <option value="8">Harar</option>
+      <option value="9">Addis Abeba</option>
+      <option value="10">Dire Dawa</option>
+    </select>
+    
+    <select name="recidence" required="required">  
+      <option selected="true" disabled="disabled" value="">Residence</option>
+      <option value="1">Urban</option>
+      <option value="2">Rural</option>
+    </select>
+    
+    <select name="ANC visit" required="required">  
+      <option selected="true" disabled="disabled" value="">ANC visit(times per week)</option> 
+      <option value="0">One times</option>
+      <option value="1">Two times</option>
+      <option value="2">Three times</option>
+      <option value="3">Four times</option>
+      <option value="4">Five times</option>
+    </select>
+
+          <input  type="text" name="EducLevel" placeholder="Womens Education level? (0 - if no, 1 - if yes)" required="required" />
+          
+    <select name="waterSrc" required="required">  
+      <option selected="true" disabled="disabled" value="">Source of water</option>
+      <option value="0">Not Improved</option>
+      <option value="1">Improved</option>
+    </select>
+    
+    <select name="toiletType" required="required">  
+      <option selected="true" disabled="disabled" value="">Type of toilet</option>
+      <option value="0">Not Improved</option>
+      <option value="1">Improved</option>
+    </select>  
+    
+    <select name="houseHoldMemb" required="required">  
+      <option selected="true" disabled="disabled" value="">House hold member</option>
+      <option value="1">1 – 5 member</option>
+      <option value="2">6 – 10 member</option>
+      <option value="3">11 – 15 member</option>
+      <option value="4">16 - 20 member</option>
+    </select> 
+          <input  type="text" name="freqRnewsPpr" placeholder="Frequently read news paper? (0 - if no, 1 - if yes)" required="required" />
+         
+          <input  type="text" name="freLTv" placeholder="Frequently listen TV? (0 - if no, 1 - if yes) " required="required" />
+
+    <select name="pregDuration" required="required">  
+      <option selected="true" disabled="disabled" value="">Duration of Pregnancy</option>
+      <option value="0">1 – 3 weeks </option>
+      <option value="1">4 – 6 weeks</option>
+      <option value="2"> 7 – 9 weeks</option>
+       <option value="2"> morethan 9 weeks</option>
+    </select>           
+
+    <select name="BirthHistory" required="required"> 
+      <option selected="true" disabled="disabled" value="">History of giving birth</option>
+      <option value="0">0 – 4 birth</option>
+      <option value="1">5 – 9 birth</option>
+      <option value="2"> morethan 9 birth</option>
+    </select>  
+    
+      <input  type="text" name="pregWanted" placeholder="Is the pregnancy wanted? (0 - if no, 1 - if yes)" required="required" />
+      <input  type="text" name="terminationHist" placeholder="Is there any termination history? (0 - if no, 1 - if yes)" required="required" />
+      <input  type="text" name="contraceptive" placeholder="Uses contraceptive? (1 - if no, 2 - if yes)" required="required" />
+      <input  type="text" name="currBfeeding" placeholder="Current breast feeding(0 - if no, 1 - if yes)" required="required" />
+          
+
+    <select name="BMI" required="required"> 
+      <option selected disabled value="">Body Mass Index(BMI)</option>
+      <option value="0">Underweight</option>
+      <option value="1">Normal</option>
+      <option value="2">Overweight</option>
+    </select>
+
+          <input  type="text" name="mosquitoNet" placeholder="Mosquito Net user? (0 - if no, 1 - if yes) " required="required" />
+          <input  type="text" name="addiction" placeholder="Any Addiction? (0 - if no, 1 - if yes)" required="required" />
+          <input  type="text" name="h_ocup" placeholder="husband occupation" required="required" />
+          <input  type="text" name="occup" placeholder="Womens occupation? (0 - if no, 1 - if yes)" required="required" /> 
+   
+    <select name="delivery_Place" required="required">  
+      <option selected="true" disabled="disabled" value="">Delivery Place</option>
+      <option value="0">Home</option>
+      <option value="1">Health center/Hospital</option>
+    </select>
+      
+          <input  type="text" name="vaccination" placeholder="Taken any vaccination? (0 - if no, 1 - if yes)" required="required" /> 
+      
+        <select name="wealthIndex" required="required">
+          <option selected disabled value="">Wealth Index(WI)</option>
+          <option value="1">Lowest</option>
+          <option value="2">Middle</option>
+          <option value="3">Highest</option>
+        </select>
+  
+     <br>
+     <br>
+<!-- submit button -->           
+<input type="submit" value="Predict Anemia severity">
+</form>
+</div>
+    
+<!-- the predicted text -->
+<h3>{{ prediction_text }}</h3>
+<p style="margin-top:0px; margin-right:10px; color: #ffffff;"> By Bekan Kitaw</>
+</body>
+</html>
+
